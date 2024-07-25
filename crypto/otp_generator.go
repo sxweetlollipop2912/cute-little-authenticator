@@ -1,5 +1,5 @@
 package crypto
 
-type RNG interface {
+type OTPGenerator interface {
 	Generate(secret []byte, counter uint64, digits uint) (uint32, error)
 }
