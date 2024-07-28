@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"crypto/sha512"
 	"hash"
+	"slices"
 )
 
 type AlgoType string
@@ -30,4 +31,13 @@ var mapHashToFn = map[HashType]func() hash.Hash{
 
 func HashFnFromType(hashType HashType) func() hash.Hash {
 	return mapHashToFn[hashType]
+}
+
+func GetHashTypesStr() []string {
+	var hashTypes []string
+	for k := range mapHashToFn {
+		hashTypes = append(hashTypes, string(k))
+	}
+	slices.Sort(hashTypes)
+	return hashTypes
 }
